@@ -4,6 +4,62 @@ let currentSelectedMarker = null;
 const defaultIcon = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
 const selectedIcon = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
 
+// 投稿カードをハイライト表示する関数
+function highlightLocationItem(targetLat, targetLng) {
+    const locationItems = document.querySelectorAll(".location-item");
+
+    // 全ての投稿から既存のハイライトとアニメーションを削除
+    locationItems.forEach((item) => {
+        item.classList.remove("highlighted", "fade-out");
+    });
+
+    locationItems.forEach((item) => {
+        const itemLat = parseFloat(item.dataset.lat);
+        const itemLng = parseFloat(item.dataset.lng);
+
+        // 緯度経度が一致する投稿を表示
+        if (itemLat === targetLat && itemLng === targetLng) {
+            const locationView = document.querySelector(".location-view");
+
+            // デバイスサイズに応じてスクロール方向を変更
+            const isPC = window.innerWidth >= 600;
+
+            if (isPC) {
+                // PC版：縦スクロール
+                const itemOffset = item.offsetTop;
+                locationView.scrollTo({
+                    top: itemOffset - 220,
+                    behavior: "smooth",
+                });
+            } else {
+                // スマホ版：横スクロール
+                const itemOffset = item.offsetLeft;
+                const containerWidth = locationView.clientWidth;
+                const itemWidth = item.offsetWidth;
+                // カードを中央に配置するようにオフセットを計算
+                const scrollLeft = itemOffset - (containerWidth - itemWidth) / 2;
+                locationView.scrollTo({
+                    left: Math.max(0, scrollLeft),
+                    behavior: "smooth",
+                });
+            }
+
+            // ハイライト効果を追加
+            item.classList.add("highlighted");
+
+            // 3秒後にフェードアウトアニメーションを開始
+            setTimeout(() => {
+                item.classList.add("fade-out");
+
+                // アニメーション完了後にクラスを削除
+                setTimeout(() => {
+                    item.classList.remove("highlighted", "fade-out");
+                }, 500); // フェードアウトアニメーションの時間と同じ
+            }, 2500); // 表示時間を少し短くしてフェードアウト時間を確保
+        }
+    });
+}
+
 function initMap() {
     // デフォルトの中心位置（大阪）
     const osakaCenter = {
@@ -50,34 +106,14 @@ function initMap() {
             }
             marker.setIcon(selectedIcon);
             currentSelectedMarker = marker;
+            currentSelectedMarker.locationData = location; // ロケーションデータを保存
 
-            // 対応する投稿を表示
-            const locationItems = document.querySelectorAll(".location-item");
-            locationItems.forEach((item) => {
-                const itemLat = parseFloat(item.dataset.lat);
-                const itemLng = parseFloat(item.dataset.lng);
+            // 対応する投稿をハイライト表示
+            highlightLocationItem(location.lat, location.lng);
 
-                // 緯度経度が一致する投稿を表示
-                if (itemLat === location.lat && itemLng === location.lng) {
-                    // スクロール位置を調整
-                    const locationView = document.querySelector(".location-view");
-                    const itemOffset = item.offsetTop;
-                    locationView.scrollTo({
-                        top: itemOffset - 220,
-                        behavior: "smooth",
-                    });
-
-                    // ハイライト効果を追加
-                    item.classList.add("highlighted");
-                    setTimeout(() => {
-                        item.classList.remove("highlighted");
-                    }, 2000);
-                }
-            });
-
-            // パネルが閉じている場合は開く
+            // パネルが閉じている場合は開く（PC版のみ）
             const locationViewWrapper = document.querySelector(".location-view-wrapper");
-            if (locationViewWrapper.classList.contains("isClosing")) {
+            if (window.innerWidth >= 600 && locationViewWrapper.classList.contains("isClosing")) {
                 locationViewWrapper.classList.remove("isClosing");
                 locationViewWrapper.classList.add("isOpening");
             }
@@ -103,4 +139,17 @@ closeBtn.addEventListener("click", () => {
         locationViewWrapper.classList.remove("isClosing");
         locationViewWrapper.classList.add("isOpening");
     }
+});
+
+// 画面リサイズ時の処理
+let resizeTimeout;
+window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        // 現在選択されているマーカーがある場合、再度ハイライト表示を実行
+        if (currentSelectedMarker && currentSelectedMarker.locationData) {
+            const location = currentSelectedMarker.locationData;
+            highlightLocationItem(location.lat, location.lng);
+        }
+    }, 100);
 });
