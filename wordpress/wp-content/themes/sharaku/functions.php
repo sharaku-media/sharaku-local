@@ -6,6 +6,15 @@ function sharaku_enqueue_assets() {
         'sharaku-style',
         get_stylesheet_uri()  // style.cssを読み込む
     );
+
+    // index.cssを全ページで読み込む（モバイル検索のスタイルを含む）
+    wp_enqueue_style(
+        'sharaku-index-style',
+        get_template_directory_uri() . '/styles/index.css',
+        [], 
+        null
+    );
+
     // 共通のJavaScriptを読み込む（全ページ共通）
   wp_enqueue_script(
     'sharaku-common-script',
@@ -13,6 +22,15 @@ function sharaku_enqueue_assets() {
     [],
     null,
     true
+  );
+
+  // モバイル検索のスクリプトを全ページで読み込む
+  wp_enqueue_script(
+      'sharaku-mobile-search-script',
+      get_template_directory_uri() . '/scripts/mobile-search.js',
+      ['sharaku-common-script'], // common.jsに依存
+      null,
+      true
   );
 
   // 投稿詳細ページ用のアセット
@@ -40,17 +58,13 @@ function sharaku_enqueue_assets() {
   }
 
   if (is_front_page() || is_home()) {
-    // まずスタイルシートを読み込む
-    wp_enqueue_style(
-        'sharaku-index-style',
-        get_template_directory_uri() . '/styles/index.css'
-    );
+    // index.cssは既に上で読み込み済みなので、ここでは読み込まない
 
-    // まずindex.jsを読み込む
+    // index.jsを読み込む（モバイル検索は既に全ページで読み込み済み）
     wp_enqueue_script(
         'sharaku-index-script',
         get_template_directory_uri() . '/scripts/index.js',
-        [], // 依存関係なし
+        ['sharaku-mobile-search-script'], // mobile-search.jsに依存
         null,
         true
     );
