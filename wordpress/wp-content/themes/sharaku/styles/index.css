@@ -188,24 +188,28 @@ main {
     }
 
     /* 季節タグは既存の色を保持  */
-    .tag-button[data-season="春"] {
+    .tag-button[data-season="春"],
+    .search-tag[data-season="春"] {
         background-color: #41ca4d;
-        color: #fafafa;
+        color: #fefefe !important;
     }
 
-    .tag-button[data-season="夏"] {
+    .tag-button[data-season="夏"],
+    .search-tag[data-season="夏"] {
         background-color: #f65f55;
-        color: #fafafa;
+        color: #fefefe !important;
     }
 
-    .tag-button[data-season="秋"] {
+    .tag-button[data-season="秋"],
+    .search-tag[data-season="秋"] {
         background-color: #ef7d30;
-        color: #fafafa;
+        color: #fefefe !important;
     }
 
-    .tag-button[data-season="冬"] {
+    .tag-button[data-season="冬"],
+    .search-tag[data-season="冬"] {
         background-color: #5d8ef2;
-        color: #fafafa;
+        color: #fefefe !important;
     }
 
     /* 選択状態のスタイル */
@@ -266,12 +270,22 @@ main {
     }
 
     .search-container input {
-        min-width: 20px; /* 入力欄の最小幅 */
-        max-width: 40px; /* 入力欄の最大幅 */
+        min-width: 0; /* 最小幅を0に変更 */
+        flex-grow: 1; /* 残りのスペースを占める */
         border: none;
         background: none;
         outline: none;
         font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    /* プレースホルダーが空の時は入力フィールドを隠す */
+    .search-container input[placeholder=""] {
+        width: 0;
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
     }
 
     .close-btn {

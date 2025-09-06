@@ -21,9 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
             tagElement.className = "search-tag";
             tagElement.textContent = tagText;
 
-            // 季節タグの場合は背景色を設定
+            // 季節タグの場合はdata-season属性と背景色を設定
             if (seasonTags[tagText]) {
+                tagElement.setAttribute("data-season", tagText);
                 tagElement.style.backgroundColor = seasonTags[tagText];
+                tagElement.style.color = "#fefefe";
             }
 
             // タグクリックで削除する処理
@@ -54,13 +56,15 @@ document.addEventListener("DOMContentLoaded", function () {
     // 検索フィールドの表示状態を更新
     function updateSearchVisibility() {
         // クリアボタンの表示制御
-        clearButton.style.display = selectedTags.length > 0 ? "flex" : "none";
+        clearButton.style.display = selectedTags.length > 0 || searchInput.value ? "flex" : "none";
 
-        // プレースホルダーの表示制御
+        // プレースホルダーの表示制御と入力フィールドの状態管理
         if (selectedTags.length > 0) {
             searchInput.placeholder = "";
+            searchInput.style.display = searchInput.value ? "block" : "none";
         } else {
             searchInput.placeholder = "検索";
+            searchInput.style.display = "block";
         }
     }
 
@@ -101,7 +105,25 @@ document.addEventListener("DOMContentLoaded", function () {
     // 検索入力のイベントリスナー
     searchInput.addEventListener("input", (e) => {
         searchText = e.target.value;
+        updateSearchVisibility();
         filterLocations();
+    });
+
+    // 入力フィールドのフォーカスイベント
+    searchInput.addEventListener("focus", () => {
+        if (selectedTags.length > 0) {
+            searchInput.style.display = "block";
+            searchInput.placeholder = "追加で検索...";
+        }
+    });
+
+    // 入力フィールドのブラーイベント
+    searchInput.addEventListener("blur", () => {
+        if (selectedTags.length > 0 && !searchInput.value) {
+            setTimeout(() => {
+                updateSearchVisibility();
+            }, 100);
+        }
     });
 
     // タグボタンの初期化とクリックイベント
@@ -138,10 +160,12 @@ document.addEventListener("DOMContentLoaded", function () {
         selectedTags = [];
         searchInput.value = "";
         searchInput.placeholder = "検索";
+        searchInput.style.display = "block";
         clearButton.style.display = "none";
         document.querySelectorAll(".tag-button").forEach((button) => {
             button.classList.remove("selected");
         });
+        updateSearchVisibility();
         filterLocations();
     });
 });
