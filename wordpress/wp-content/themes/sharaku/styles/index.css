@@ -13,8 +13,7 @@ button {
 }
 
 body {
-    height: calc(100vh - 20px);
-    overflow: hidden;
+    height: calc(100svh - 20px);
     display: flex;
     flex-direction: column;
 }
@@ -300,15 +299,15 @@ main {
 }
 
 .mobile-selected-tag {
-    min-width: 50px;
+    /* min-width: 30px;
     height: 30px;
-    line-height: 30px;
-    padding: 0 8px;
+    line-height: 30px; */
+    padding: 4px 8px;
     font-size: 12px;
     text-align: center;
     color: #fefefe;
     cursor: pointer;
-    border-radius: 12px;
+    border-radius: 4px;
     background: #373737;
     transition: all 0.2s;
 }
@@ -489,6 +488,10 @@ main {
 }
 
 @media screen and (min-width: 600px) {
+    body {
+        height: 100vh;
+        overflow: hidden;
+    }
     /* PC版では非表示 */
     .mobile-search-overlay {
         display: none;
