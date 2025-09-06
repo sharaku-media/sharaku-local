@@ -1,4 +1,5 @@
 <?php include get_template_directory() . '/parts/header.php'; ?>
+<?php include get_template_directory() . '/parts/mobile-search.php'; ?>
 <!-- この中に書いていくmain -->
 <!-- body -->
 <main>
