@@ -60,6 +60,9 @@ function highlightLocationItem(targetLat, targetLng) {
     });
 }
 
+// highlightLocationItem関数をグローバルに公開
+window.highlightLocationItem = highlightLocationItem;
+
 function initMap() {
     // デフォルトの中心位置（大阪）
     const osakaCenter = {
