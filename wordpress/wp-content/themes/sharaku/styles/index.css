@@ -1,0 +1,270 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*:focus {
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+body {
+    height: calc(100vh - 20px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Mobile header */
+.mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    padding-inline: 10px;
+    padding-top: 10px;
+}
+
+.search-icon {
+    padding: 4px;
+    background: white;
+    border: 1px solid black;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Map view */
+main {
+    position: relative;
+    flex: 1;
+}
+
+.map-view-container {
+    padding-inline: 10px;
+}
+
+.map-view {
+    background: #d9d9d9;
+    width: 100%;
+    aspect-ratio: 2/3;
+    /* opacity: 0.2; */
+    border-radius: 10px;
+}
+
+.location-view-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.search-wrapper {
+    display: none;
+}
+
+.location-view {
+    display: flex;
+    gap: 10px;
+    padding: 0 10px;
+    width: 100vw;
+    overflow-x: scroll;
+}
+
+.location-item {
+    padding: 8px;
+    background: #fefefe;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.08);
+}
+
+.location-item-img-container {
+    /* min-width: 180px; */
+    width: 240px;
+    max-width: 240px;
+    height: 185px;
+    max-height: 220px;
+    border-radius: 12px;
+    overflow: hidden;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+}
+
+.location-item-content {
+    padding-inline: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.location-item-title {
+    font-size: 20px;
+    color: #151515;
+}
+
+.location-item-address {
+    font-size: 14px;
+    padding-top: 2px;
+}
+
+.location-item-tags-view {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.location-item-tag {
+    padding-inline: 12px;
+    padding-block: 3px;
+    background: #212121;
+    color: #fefefe;
+    font-size: 12px;
+    border-radius: 4px;
+}
+
+.tagList {
+    display: none;
+}
+
+@media screen and (min-width: 600px) {
+    /* PC版のタグスタイル */
+    .tag-button,
+    .search-tag {
+        background-color: #f5f5f5; /* 背景色を明るいグレーに */
+        color: #373737; /* テキストを暗めに */
+    }
+
+    /* 季節タグは既存の色を保持  */
+    .tag-button[data-season="春"] {
+        background-color: #41ca4d;
+        color: #fafafa;
+    }
+
+    .tag-button[data-season="夏"] {
+        background-color: #f65f55;
+        color: #fafafa;
+    }
+
+    .tag-button[data-season="秋"] {
+        background-color: #ef7d30;
+        color: #fafafa;
+    }
+
+    .tag-button[data-season="冬"] {
+        background-color: #5d8ef2;
+        color: #fafafa;
+    }
+
+    /* 選択状態のスタイル */
+    .tag-button.selected::before {
+        background-color: rgba(0, 0, 0, 0.1); /* 暗めのオーバーレイ */
+    }
+
+    /* ホバー時のエフェクト */
+    .tag-button:hover::before {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .search-icon {
+        display: none;
+    }
+
+    .map-view {
+        aspect-ratio: auto;
+        height: calc(100vh - 34px);
+    }
+
+    .location-view-wrapper {
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        top: -30px;
+        left: auto;
+        height: 100vh;
+        transform: translateY(30px);
+        padding-inline: 30px;
+        padding-top: 20px;
+        transition: all 0.4s;
+    }
+
+    .isOpening {
+        right: 0;
+    }
+
+    .isClosing {
+        right: -520px;
+    }
+
+    .search-wrapper {
+        display: block;
+        position: relative;
+    }
+
+    .search-container {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap; /* タグを折り返し */
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        background: #d9d9d9;
+        border-radius: 8px;
+        max-width: 450px; /* 最大幅を設定 */
+    }
+
+    .search-container input {
+        min-width: 20px; /* 入力欄の最小幅 */
+        max-width: 40px; /* 入力欄の最大幅 */
+        border: none;
+        background: none;
+        outline: none;
+        font-size: 16px;
+    }
+
+    .close-btn {
+        position: absolute;
+        left: -80px;
+        height: 50px;
+        width: 50px;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px 0 0 10px;
+        cursor: pointer;
+    }
+
+    .tagList {
+        margin-bottom: 10px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        max-width: 100%; /* タグリストの最大幅を設定 */
+        width: 450px;
+        overflow: hidden; /* はみ出した部分を隠す */
+        padding: 8px 0;
+    }
+
+    .location-view {
+        flex-direction: column;
+        width: 450px;
+        overflow-y: scroll;
+        padding: 10px 0 60px 4px;
+    }
+
+    .location-item {
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        width: 96%;
+        height: 200px;
+    }
+}

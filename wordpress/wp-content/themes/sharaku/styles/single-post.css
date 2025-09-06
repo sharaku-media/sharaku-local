@@ -1,0 +1,628 @@
+h1 {
+    font-size: 32px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+/* main image */
+.main-images {
+    max-width: 450px;
+    width: 100%;
+    height: 280px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    padding-top: 8px;
+
+    .slider-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .slider-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 20; /* 拡大ボタンより上に */
+        background: rgba(0, 0, 0, 0.5);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: none; /* モバイルでは非表示 */
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: white;
+    }
+
+    .slider-arrow:hover {
+        background: rgba(0, 0, 0, 0.7);
+        transform: translateY(-50%) scale(1.1);
+    }
+
+    .slider-arrow-prev {
+        left: 10px;
+    }
+
+    .slider-arrow-next {
+        right: 10px;
+    }
+
+    .slider-arrow:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+
+    .slider-arrow:disabled:hover {
+        background: rgba(0, 0, 0, 0.5);
+        transform: translateY(-50%) scale(1);
+    }
+
+    .image-track {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        overflow-x: scroll;
+        overflow-y: hidden; /* ← これを追加 */
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        touch-action: pan-x; /* ← スマホで横スワイプのみ許可 */
+    }
+
+    .image-track::-webkit-scrollbar {
+        display: none;
+    }
+
+    .slide {
+        flex: 0 0 100%;
+        scroll-snap-align: start;
+    }
+
+    .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: #151515;
+    }
+
+    /* スライダー内の画像コンテナ */
+    .slide .image-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    .slide .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: #151515;
+    }
+
+    /* スライダー内の拡大ボタン */
+    .slide .expand-button {
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        z-index: 15;
+    }
+
+    .indicator {
+        display: flex;
+        gap: 8px;
+        position: absolute;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(221, 221, 221, 0.8);
+        border-radius: 20px;
+        padding: 6px 6px;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background 0.4s;
+    }
+
+    .dot.active {
+        background: white;
+    }
+}
+
+.back-to-top {
+    display: none; /* スマホでは非表示 */
+
+    .back-button {
+        display: none; /* スマホでは非表示 */
+    }
+}
+
+/* main imagesより下 */
+.post-content {
+    max-width: calc(450px - 32px); /* パディングを考慮した最大幅 */
+    width: calc(100% - 32px); /* パディングを考慮した幅 */
+    margin: 0 auto;
+    padding: 24px 16px 0;
+
+    /* post content */
+    .post-wrap {
+        p {
+            font-size: 14px;
+        }
+
+        .block-section {
+            padding: 32px 0;
+
+            &:not(:last-child) {
+                border-bottom: 1px solid rgba(119, 119, 119, 0.7);
+            }
+        }
+
+        .fixed-heading {
+            font-size: 20px;
+            padding-bottom: 12px;
+        }
+
+        .paragraph-access {
+            position: relative;
+            padding-left: 24px;
+            line-height: 1.6;
+        }
+
+        .paragraph-access:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            background: url("https://sharaku-photo.sakura.ne.jp/wp-content/themes/sharaku/images/pin-icon.svg")
+                no-repeat center;
+        }
+
+        .label-train:empty::before,
+        .label-bus:empty::before {
+            display: none;
+        }
+
+        .label-train,
+        .label-bus {
+            position: relative;
+            padding-left: 28px;
+            padding-bottom: 8px;
+        }
+
+        .label-train:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            background: url("https://sharaku-photo.sakura.ne.jp/wp-content/themes/sharaku/images/train.svg")
+                no-repeat center;
+        }
+
+        .label-bus:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            background: url("https://sharaku-photo.sakura.ne.jp/wp-content/themes/sharaku/images/bus.svg")
+                no-repeat center;
+        }
+
+        /* .label-walk:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            background: url("https://sharaku-photo.sakura.ne.jp/wp-content/themes/sharaku/images/walk.svg")
+                no-repeat center;
+        } */
+
+        .location-map {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            padding-top: 56.25%; /* 16:9のアスペクト比 */
+            margin: 0 auto;
+            overflow: hidden; /* iframeのはみ出しを防ぐ */
+            border-radius: 12px;
+            margin-top: 12px;
+        }
+
+        .location-map iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100% !important; /* iframeの幅を強制的に100%に */
+            height: 100% !important; /* iframeの高さを強制的に100%に */
+            border: 0;
+        }
+
+        .point-group {
+            .wp-block-group__inner-container {
+                width: 100%;
+                max-width: 450px;
+                /* padding-bottom: 26px; */
+
+                & figure {
+                    /* width: 100%; */
+                    max-width: 450px;
+                    /* height: 300px; */
+                    margin: 0 8px;
+                    position: relative;
+                    overflow: hidden;
+
+                    & img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        background-color: #151515;
+                        border-radius: 8px;
+                    }
+                }
+
+                .point-text-group {
+                    width: 100%;
+                    height: 100%;
+                    & .wp-block-group__inner-container {
+                        width: 100%;
+                        max-width: 450px;
+                        height: 100%;
+                        padding-left: 8px;
+                        padding-bottom: 18px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-start;
+                        align-items: flex-start;
+
+                        .point-title {
+                            font-size: 16px;
+                            font-weight: bold;
+                            padding-top: 8px;
+                        }
+
+                        .point-description {
+                            width: 100%;
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* 季節タグは既存の色を保持  */
+.tag-button[data-season="春"] {
+    display: inline-block;
+    width: 50px;
+    background-color: #41ca4d;
+    color: #fafafa;
+}
+
+.tag-button[data-season="夏"] {
+    display: inline-block;
+    width: 50px;
+    background-color: #f65f55;
+    color: #fafafa;
+}
+
+.tag-button[data-season="秋"] {
+    display: inline-block;
+    width: 50px;
+    background-color: #ef7d30;
+    color: #fafafa;
+}
+
+.tag-button[data-season="冬"] {
+    display: inline-block;
+    width: 50px;
+    background-color: #5d8ef2;
+    color: #fafafa;
+}
+
+/* 画像拡大モーダル */
+.image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100svh;
+    z-index: 1000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-modal.active {
+    display: block;
+    opacity: 1;
+}
+
+.image-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100svh;
+    background: rgba(15, 15, 15, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.image-modal-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    cursor: default;
+}
+
+.modal-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 8px;
+}
+
+.image-modal-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: background 0.3s ease;
+}
+
+.image-modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.modal-nav:hover {
+    background: rgba(255, 255, 255, 0.3);
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.modal-nav-prev {
+    left: -70px;
+}
+
+.modal-nav-next {
+    right: -70px;
+}
+
+.modal-nav:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.modal-nav:disabled:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-50%) scale(1);
+}
+
+/* 画像をクリック可能にするスタイル */
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.expand-button {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: all 0.3s ease;
+    z-index: 10;
+    opacity: 0.8;
+}
+
+.expand-button:hover {
+    background: rgba(0, 0, 0, 0.9);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.expand-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+.clickable-image {
+    cursor: default;
+    transition: none;
+}
+
+.clickable-image:hover {
+    transform: none;
+    opacity: 1;
+}
+
+/* モバイルでのタッチフィードバック */
+@media (max-width: 768px) {
+    .expand-button {
+        width: 36px;
+        height: 36px;
+        bottom: 6px;
+        right: 6px;
+    }
+
+    .expand-button svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .expand-button:active {
+        transform: scale(0.95);
+    }
+
+    .modal-nav {
+        width: 60px;
+        height: 60px;
+    }
+
+    .modal-nav-prev {
+        left: -80px;
+    }
+
+    .modal-nav-next {
+        right: -80px;
+    }
+
+    .image-modal-close {
+        top: -60px;
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .pc-header {
+        display: none !important;
+    }
+
+    .single-post {
+        max-width: 1000px;
+        width: 100%;
+        height: 100svh;
+        margin: 0 auto; /* marginを0にしてヘッダー分の余白を削除 */
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        overflow: hidden;
+        overflow-y: hidden;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        .back-to-top {
+            display: block; /* デスクトップでは表示 */
+            position: fixed;
+            top: 58px;
+            left: 24px;
+            z-index: 100;
+        }
+
+        .back-button {
+            display: inline-flex; /* PCでは表示 */
+            align-items: center;
+            gap: 16px;
+            padding: 16px 32px;
+            background: #373737;
+            color: #fefefe;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 3px 3px 6px rgba(21, 21, 21, 0.25);
+            transition: all 0.3s ease-in-out;
+
+            svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        .back-button:hover {
+            scale: 1.05;
+        }
+
+        .main-images {
+            max-width: 600px;
+            width: 100%;
+            height: 600px;
+            margin-right: 32px;
+            padding-top: 24px;
+
+            .slider-arrow {
+                display: flex; /* PCでは表示 */
+            }
+
+            .image-track {
+                height: 100%;
+                width: 100%;
+                overflow-y: hidden; /* 縦スクロールを無効化 */
+                border-radius: 12px;
+
+                .slide {
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                }
+            }
+        }
+
+        .post-content {
+            max-width: 400px; /* パディングを考慮した最大幅 */
+            width: 100%; /* パディングを考慮した幅 */
+            height: 100svh;
+            padding: 24px 16px 100px;
+            overflow-y: auto;
+
+            .post-wrap {
+                height: 100svh;
+            }
+        }
+    }
+}
