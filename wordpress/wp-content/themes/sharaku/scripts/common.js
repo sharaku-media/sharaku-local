@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (seasonTags[tagText]) {
                 tagElement.setAttribute("data-season", tagText);
                 tagElement.style.backgroundColor = seasonTags[tagText];
-                tagElement.style.color = "#fefefe";
+                tagElement.style.color = "var(--bgColor)";
             }
 
             // タグクリックで削除する処理
@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const tagText = button.textContent.trim();
         if (seasonTags[tagText]) {
             button.style.backgroundColor = seasonTags[tagText];
-            button.style.color = "#fafafa"; // 季節タグボタンの文字色も設定
+            button.style.color = "var(--whiteColor)"; // 季節タグボタンの文字色も設定
         }
 
         button.addEventListener("click", function () {
