@@ -88,7 +88,7 @@ Tags: blog, custom-background, responsive-layout
     padding-top: 12px;
 }
 
-.tag-button,
+/* .tag-button,
 .search-tag {
     display: inline-block;
     min-width: 50px;
@@ -105,7 +105,7 @@ Tags: blog, custom-background, responsive-layout
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
-}
+} */
 
 .search-container {
     position: relative;
