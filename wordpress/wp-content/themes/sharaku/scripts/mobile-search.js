@@ -201,11 +201,6 @@ document.addEventListener("DOMContentLoaded", function () {
         mobileSearchBack.addEventListener("click", closeMobileSearch);
     }
 
-    // 閉じるボタンクリック
-    if (mobileSearchClose) {
-        mobileSearchClose.addEventListener("click", closeMobileSearch);
-    }
-
     // 検索入力
     if (mobileSearchInput) {
         mobileSearchInput.addEventListener("input", (e) => {
