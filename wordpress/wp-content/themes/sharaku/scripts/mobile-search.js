@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const mobileSearchIcon = document.querySelector(".search-icon");
     const mobileSearchOverlay = document.getElementById("mobile-search-overlay");
     const mobileSearchBack = document.querySelector(".mobile-search-back");
-    const mobileSearchClose = document.querySelector(".mobile-search-close");
     const mobileSearchInput = document.getElementById("mobile-search-input");
     const mobileClearSearch = document.getElementById("mobile-clear-search");
     const mobileSelectedTags = document.getElementById("mobile-selected-tags");
