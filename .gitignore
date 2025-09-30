@@ -1,7 +1,3 @@
-# WordPress core (除外しておくことでコアのバージョン管理を避ける)
-wp-admin/
-wp-includes/
-
 # セキュリティに関わるファイル
 wp-config.php
 .htaccess
