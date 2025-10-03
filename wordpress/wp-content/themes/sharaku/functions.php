@@ -84,6 +84,115 @@ add_action('wp_enqueue_scripts', 'sharaku_enqueue_assets');
 // WordPressのネイティブLazy Loadを有効化
 add_filter('wp_lazy_loading_enabled', '__return_true');
 
+function create_article_post_type() {
+  register_post_type('article',
+    array(
+      'labels' => array(
+        'name'          => '記事',
+        'singular_name' => '記事'
+      ),
+      'public'       => true,
+      'has_archive'  => true,
+      'menu_position'=> 5,
+      'show_in_rest' => true,
+      'rewrite'      => array('slug' => 'article'),
+      'supports'     => array('title','editor','thumbnail','excerpt','author','revisions')
+    )
+  );
+}
+add_action('init', 'create_article_post_type');
+
+// 記事(article)のブロックエディタ初期構成
+add_action('init', function () {
+    $post_type = get_post_type_object('article');
+    if ($post_type) {
+        $post_type->template = [
+
+            // 1. メイン画像（1枚）
+            ['core/image', [
+                'align' => 'wide',
+                'className' => 'main-image'
+            ]],
+
+            // 2. はじめに
+            ['core/group', [
+                'className' => 'block-section intro-section'
+            ], [
+                ['core/heading', [
+                    'level' => 3,
+                    'content' => 'はじめに', // ←編集可能
+                    'className' => 'fixed-heading'
+                ]],
+                ['core/paragraph', [
+                    'placeholder' => '記事の導入文を入力してください',
+                    'className' => 'paragraph-intro'
+                ]]
+            ]],
+
+            // 3. 使用機材
+            ['core/group', [
+                'className' => 'block-section tools-section'
+            ], [
+                ['core/heading', [
+                    'level' => 3,
+                    'content' => '使用した機材・アプリ', // ←編集可能
+                    'className' => 'fixed-heading'
+                ]],
+                ['core/list', [
+                    'placeholder' => '使用機材を箇条書きで入力'
+                ]]
+            ]],
+
+            // 4. ステップ解説 1
+            ['core/group', ['className' => 'block-section step-section'], [
+                ['core/heading', [
+                    'level' => 3,
+                    'content' => 'STEP1：タイトルを入力', // ←初期値、自由に編集可能
+                ]],
+                ['core/paragraph', ['placeholder' => 'ここに解説を入力']]
+            ]],
+
+            // 4. ステップ解説 2
+            ['core/group', ['className' => 'block-section step-section'], [
+                ['core/heading', [
+                    'level' => 3,
+                    'content' => 'STEP2：タイトルを入力',
+                ]],
+                ['core/paragraph', ['placeholder' => 'ここに解説を入力']]
+            ]],
+
+            // 4. ステップ解説 3
+            ['core/group', ['className' => 'block-section step-section'], [
+                ['core/heading', [
+                    'level' => 3,
+                    'content' => 'STEP3：タイトルを入力',
+                ]],
+                ['core/paragraph', ['placeholder' => 'ここに解説を入力']]
+            ]],
+
+            // 5. ワンポイントアドバイス
+            ['core/group', ['className' => 'block-section advice-section'], [
+                ['core/heading', ['level' => 3, 'content' => 'ワンポイントアドバイス']],
+                ['core/paragraph', ['placeholder' => 'ちょっとした補足やプロのコツを書いてください']]
+            ]],
+
+            // 6. 関連記事
+            ['core/group', ['className' => 'block-section related-section'], [
+                ['core/heading', [
+                    'level' => 3,
+                    'content' => '関連記事'
+                ]],
+                // 👇 ここには何も置かず、ユーザーが自由にブロック追加できるようにする
+            ]],
+        ];
+
+        // ブロック構成は固定せず「追加はOK／削除はNG」にしたい場合
+        $post_type->template_lock = 'insert';
+    }
+});
+
+
+
 // functions.php に追加
 function noindex_author_archive() {
   if (is_author()) {
