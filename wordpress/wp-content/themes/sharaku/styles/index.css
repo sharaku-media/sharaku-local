@@ -64,6 +64,7 @@ main {
 }
 
 .map-view-container {
+    padding-top: 10px;
     padding-inline: 10px;
 }
 
@@ -443,7 +444,7 @@ main {
     color: var(--bgColor);
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 768px) {
     body {
         height: 100vh;
         overflow: hidden;
@@ -452,10 +453,6 @@ main {
     .mobile-search-overlay {
         display: none;
     }
-
-    /* PC版のタグスタイル */
-
-    /* 季節タグは既存の色を保持  */
 
     /* 選択状態のスタイル */
     .tag-button.selected::before {
