@@ -10,7 +10,7 @@ wp-content/debug.log
 
 # wp-content 以下で自作テーマやプラグインは明示的に除外から外す
 wordpress/wp-content/plugins/
-wordpress/wp-content/languages/*
+wordpress/wp-content/languages/
 wordpress/wp-content/uploads/
 wordpress/wp-content/upgrade/
 
