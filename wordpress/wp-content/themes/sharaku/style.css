@@ -17,6 +17,92 @@ Tags: blog, custom-background, responsive-layout
     display: none; /* デフォルトでは非表示 */
 }
 
+/* 季節タグ 共通スタイル */
+.tag-button[data-season="春"],
+.search-tag[data-season="春"],
+.mobile-tag-button[data-season="春"] {
+    background-color: #41ca4d !important;
+    color: var(--bgColor) !important;
+}
+
+.tag-button[data-season="夏"],
+.search-tag[data-season="夏"],
+.mobile-tag-button[data-season="夏"] {
+    background-color: #f65f55 !important;
+    color: var(--bgColor) !important;
+}
+
+.tag-button[data-season="秋"],
+.search-tag[data-season="秋"],
+.mobile-tag-button[data-season="秋"] {
+    background-color: #ef7d30 !important;
+    color: var(--bgColor) !important;
+}
+
+.tag-button[data-season="冬"],
+.search-tag[data-season="冬"],
+.mobile-tag-button[data-season="冬"] {
+    background-color: #5d8ef2 !important;
+    color: var(--bgColor) !important;
+}
+
+/* タグボタン 共通スタイル */
+.tag-button,
+.search-tag,
+.mobile-tag-button {
+    display: inline-block;
+    min-width: 50px;
+    height: 25px;
+    padding: 2px 8px;
+    background-color: var(--bgBkgColor);
+    color: var(--bgColor);
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 21px;
+    border-radius: 4px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+@media (min-width: 600px) {
+    .tag-button,
+    .search-tag {
+        background-color: var(--whiteColor);
+        color: var(--bgBkgColor);
+    }
+}
+
+.tag-button.selected,
+.search-tag.selected,
+.mobile-tag-button.selected {
+    background: #555;
+    color: var(--bgColor);
+}
+
+.tag-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(var(--tagOverlayColor), 0); /* 初期状態は透明 */
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.tag-button.selected::before {
+    background-color: rgba(var(--tagOverlayColor), 0.3); /* 選択時に半透明のオーバーレイを表示 */
+}
+
+/* ホバー時のエフェクト */
+.tag-button:hover::before {
+    background-color: rgba(var(--tagOverlayColor), 0.1); /* ホバー時は薄いオーバーレイ */
+}
+
 /* PCサイズ（600px以上）でのヘッダー表示 */
 @media screen and (min-width: 600px) {
     .pc-header {
