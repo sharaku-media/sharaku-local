@@ -141,14 +141,6 @@ h3 {
     }
 }
 
-.back-to-top {
-    display: none; /* スマホでは非表示 */
-
-    .back-button {
-        display: none; /* スマホでは非表示 */
-    }
-}
-
 /* main imagesより下 */
 .post-content {
     max-width: calc(450px - 32px); /* パディングを考慮した最大幅 */
@@ -310,8 +302,6 @@ h3 {
         }
     }
 }
-
-/* 季節タグは既存の色を保持  */
 
 /* 画像拡大モーダル */
 .image-modal {
@@ -529,37 +519,7 @@ h3 {
         right: 0;
         bottom: 0;
 
-        .back-to-top {
-            display: block; /* デスクトップでは表示 */
-            position: fixed;
-            top: 58px;
-            left: 24px;
-            z-index: 100;
-        }
-
-        .back-button {
-            display: inline-flex; /* PCでは表示 */
-            align-items: center;
-            gap: 16px;
-            padding: 16px 32px;
-            background: var(--bgBkgColor);
-            color: var(--bgColor);
-            border-radius: 10px;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: bold;
-            box-shadow: 3px 3px 6px rgba(21, 21, 21, 0.25);
-            transition: all 0.3s ease-in-out;
-
-            svg {
-                width: 20px;
-                height: 20px;
-            }
-        }
-
-        .back-button:hover {
-            scale: 1.05;
-        }
+        /* back to top */
 
         .main-images {
             max-width: 600px;
