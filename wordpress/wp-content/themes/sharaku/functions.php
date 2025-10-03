@@ -57,6 +57,22 @@ function sharaku_enqueue_assets() {
     );
   }
 
+  // ✅ 記事一覧（archive-article.php 用）
+  if (is_post_type_archive('article')) {
+      wp_enqueue_style(
+          'sharaku-archive-article-style',
+          get_template_directory_uri() . '/styles/archive-article.css'
+      );
+  }
+
+  // ✅ 記事詳細（single-article.php 用）
+  if (is_singular('article')) {
+      wp_enqueue_style(
+          'sharaku-single-article-style',
+          get_template_directory_uri() . '/styles/single-article.css'
+      );
+  }
+
   if (is_front_page() || is_home()) {
     // index.cssは既に上で読み込み済みなので、ここでは読み込まない
 
