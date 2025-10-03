@@ -1,8 +1,8 @@
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
+} */
 
 *:focus {
     outline: none;
@@ -64,7 +64,7 @@ main {
 }
 
 .map-view-container {
-    padding-top: 10px;
+    padding-top: 15px;
     padding-inline: 10px;
 }
 
@@ -296,9 +296,6 @@ main {
 }
 
 .mobile-selected-tag {
-    /* min-width: 30px;
-    height: 30px;
-    line-height: 30px; */
     padding: 4px 8px;
     font-size: 12px;
     text-align: center;
@@ -307,30 +304,6 @@ main {
     border-radius: 4px;
     background: var(--bgBkgColor);
     transition: all 0.2s;
-}
-
-.mobile-selected-tag[data-season="春"] {
-    background: #41ca4d;
-    color: var(--bgColor);
-    border-color: #41ca4d;
-}
-
-.mobile-selected-tag[data-season="夏"] {
-    background: #f65f55;
-    color: var(--bgColor);
-    border-color: #f65f55;
-}
-
-.mobile-selected-tag[data-season="秋"] {
-    background: #ef7d30;
-    color: var(--bgColor);
-    border-color: #ef7d30;
-}
-
-.mobile-selected-tag[data-season="冬"] {
-    background: #5d8ef2;
-    color: var(--bgColor);
-    border-color: #5d8ef2;
 }
 
 .mobile-tag-section {
