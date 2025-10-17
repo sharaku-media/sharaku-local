@@ -14,35 +14,35 @@ Tags: blog, custom-background, responsive-layout
 /* header */
 .mobile-header,
 .logo {
-    display: none; /* デフォルトでは非表示 */
+	display: none; /* デフォルトでは非表示 */
 }
 
 /* タグボタン 共通スタイル */
 .tag-button,
 .search-tag,
 .mobile-tag-button {
-    display: inline-block;
-    min-width: 50px;
-    height: 25px;
-    padding: 2px 8px;
-    background-color: var(--bgBkgColor);
-    color: var(--bgColor);
-    font-size: 14px;
-    font-weight: 500;
-    text-align: center;
-    line-height: 21px;
-    border-radius: 4px;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
+	display: inline-block;
+	min-width: 50px;
+	height: 25px;
+	padding: 2px 8px;
+	background-color: var(--bgBkgColor);
+	color: var(--bgColor);
+	font-size: 14px;
+	font-weight: 500;
+	text-align: center;
+	line-height: 21px;
+	border-radius: 4px;
+	white-space: nowrap;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
 }
 
 .tag-button.selected,
 .search-tag.selected,
 .mobile-tag-button.selected {
-    background: #555;
-    color: var(--bgColor);
+	background: #555;
+	color: var(--bgColor);
 }
 
 /* 季節タグ 共通スタイル */
@@ -51,8 +51,8 @@ Tags: blog, custom-background, responsive-layout
 .mobile-tag-button[data-season="春"],
 .mobile-result-tag[data-season="春"],
 .mobile-selected-tag[data-season="春"] {
-    background-color: #41ca4d !important;
-    color: var(--bgColor) !important;
+	background-color: #41ca4d !important;
+	color: var(--bgColor) !important;
 }
 
 .tag-button[data-season="夏"],
@@ -60,8 +60,8 @@ Tags: blog, custom-background, responsive-layout
 .mobile-tag-button[data-season="夏"],
 .mobile-result-tag[data-season="夏"],
 .mobile-selected-tag[data-season="夏"] {
-    background-color: #f65f55 !important;
-    color: var(--bgColor) !important;
+	background-color: #f65f55 !important;
+	color: var(--bgColor) !important;
 }
 
 .tag-button[data-season="秋"],
@@ -69,8 +69,8 @@ Tags: blog, custom-background, responsive-layout
 .mobile-tag-button[data-season="秋"],
 .mobile-result-tag[data-season="秋"],
 .mobile-selected-tag[data-season="秋"] {
-    background-color: #ef7d30 !important;
-    color: var(--bgColor) !important;
+	background-color: #ef7d30 !important;
+	color: var(--bgColor) !important;
 }
 
 .tag-button[data-season="冬"],
@@ -78,171 +78,176 @@ Tags: blog, custom-background, responsive-layout
 .mobile-tag-button[data-season="冬"],
 .mobile-result-tag[data-season="冬"],
 .mobile-selected-tag[data-season="冬"] {
-    background-color: #5d8ef2 !important;
-    color: var(--bgColor) !important;
+	background-color: #5d8ef2 !important;
+	color: var(--bgColor) !important;
 }
 
 .tag-button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(var(--tagOverlayColor), 0); /* 初期状態は透明 */
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(var(--tagOverlayColor), 0); /* 初期状態は透明 */
+	border-radius: 4px;
+	transition: background-color 0.3s ease;
 }
 
 .tag-button.selected::before {
-    background-color: rgba(var(--tagOverlayColor), 0.3); /* 選択時に半透明のオーバーレイを表示 */
+	background-color: rgba(
+		var(--tagOverlayColor),
+		0.3
+	); /* 選択時に半透明のオーバーレイを表示 */
 }
 
 /* ホバー時のエフェクト */
 .tag-button:hover::before {
-    background-color: rgba(var(--tagOverlayColor), 0.1); /* ホバー時は薄いオーバーレイ */
+	background-color: rgba(
+		var(--tagOverlayColor),
+		0.1
+	); /* ホバー時は薄いオーバーレイ */
 }
 
 /* tag style */
 .tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    padding-top: 12px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	padding-top: 12px;
 }
 
 .search-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    background: #f5f5f5;
-    border-radius: 8px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 12px;
+	background: #f5f5f5;
+	border-radius: 8px;
 }
 
 .search-container input {
-    flex: 1;
-    border: none;
-    background: none;
-    outline: none;
-    font-size: 16px;
+	flex: 1;
+	border: none;
+	background: none;
+	outline: none;
+	font-size: 16px;
 }
 
 .clear-search {
-    border: none;
-    background: none;
-    cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
+	border: none;
+	background: none;
+	cursor: pointer;
+	padding: 0;
+	display: flex;
+	align-items: center;
 }
 
 /* モバイルサイズ（767px未満）でのみ表示 */
 @media screen and (max-width: 767px) {
-    .mobile-header {
-        display: flex;
-        width: 100%;
-        height: 40px;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 6px 20px 0;
+	.mobile-header {
+		display: flex;
+		width: 100%;
+		height: 40px;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 6px 20px 0;
+		background: rgba(255, 255, 255, 0.95);
+		backdrop-filter: blur(10px);
+	}
 
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-    }
+	.mobile-header .logo {
+		display: block;
+	}
 
-    .mobile-header .logo {
-        display: block;
-    }
+	.mobile-header .logo a {
+		text-decoration: none;
+		color: inherit;
+	}
 
-    .mobile-header .logo a {
-        text-decoration: none;
-        color: inherit;
-    }
+	.mobile-header .logo img {
+		display: block;
+		width: 180px;
+		height: 60px;
+		max-width: 180px;
+	}
 
-    .mobile-header .logo img {
-        display: block;
-        width: 180px;
-        height: 60px;
-        max-width: 180px;
-    }
+	.back-to-top {
+		display: none; /* スマホでは非表示 */
 
-    .back-to-top {
-        display: none; /* スマホでは非表示 */
-
-        .back-button {
-            display: none; /* スマホでは非表示 */
-        }
-    }
+		.back-button {
+			display: none; /* スマホでは非表示 */
+		}
+	}
 }
 
 /* PCサイズ(768px以上）でのみ表示 */
 @media screen and (min-width: 768px) {
-    .pc-header {
-        display: flex;
-        width: auto;
-        height: 60px;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 0 24px;
-        position: fixed;
-        top: 40px;
-        left: 20px;
-        z-index: 100;
-    }
+	.pc-header {
+		display: flex;
+		width: auto;
+		height: 60px;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 0 24px;
+		position: fixed;
+		top: 40px;
+		left: 20px;
+		z-index: 100;
+	}
 
-    .pc-header .logo {
-        display: block;
-    }
+	.pc-header .logo {
+		display: block;
+	}
 
-    .pc-header .logo a {
-        text-decoration: none;
-        color: inherit;
-    }
+	.pc-header .logo a {
+		text-decoration: none;
+		color: inherit;
+	}
 
-    .pc-header .logo img {
-        display: block;
-        width: 200px;
-        height: 60px;
-        max-width: 200px;
-    }
+	.pc-header .logo img {
+		display: block;
+		width: 200px;
+		height: 60px;
+		max-width: 200px;
+	}
 
-    .back-to-top {
-        display: block; /* デスクトップでは表示 */
-        position: fixed;
-        top: 58px;
-        left: 24px;
-        z-index: 100;
-    }
+	.back-to-top {
+		display: block; /* デスクトップでは表示 */
+		position: fixed;
+		top: 58px;
+		left: 24px;
+		z-index: 100;
+	}
 
-    .back-button {
-        display: inline-flex; /* PCでは表示 */
-        align-items: center;
-        gap: 16px;
-        padding: 16px 32px;
-        background: var(--bgBkgColor);
-        color: var(--bgColor);
-        border-radius: 10px;
-        text-decoration: none;
-        font-size: 12px;
-        font-weight: bold;
-        box-shadow: 3px 3px 6px rgba(21, 21, 21, 0.25);
-        transition: all 0.3s ease-in-out;
+	.back-button {
+		display: inline-flex; /* PCでは表示 */
+		align-items: center;
+		gap: 16px;
+		padding: 16px 32px;
+		background: var(--bgBkgColor);
+		color: var(--bgColor);
+		border-radius: 10px;
+		text-decoration: none;
+		font-size: 12px;
+		font-weight: bold;
+		box-shadow: 3px 3px 6px rgba(21, 21, 21, 0.25);
+		transition: all 0.3s ease-in-out;
 
-        svg {
-            width: 20px;
-            height: 20px;
-        }
-    }
+		svg {
+			width: 20px;
+			height: 20px;
+		}
+	}
 
-    .back-button:hover {
-        scale: 1.05;
-    }
+	.back-button:hover {
+		scale: 1.05;
+	}
 
-    .tag-button,
-    .search-tag {
-        background-color: var(--whiteColor);
-        color: var(--bgBkgColor);
-    }
+	.tag-button,
+	.search-tag {
+		background-color: var(--whiteColor);
+		color: var(--bgBkgColor);
+	}
 }

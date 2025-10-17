@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- SEO基本設定 -->
-    <title><?php wp_title('|', true, 'right'); bloginfo('name'); ?></title>
+    <title><?php wp_title('|', true, 'right');
+            bloginfo('name'); ?></title>
     <meta name="description" content="<?php bloginfo('description'); ?>">
 
     <!-- 地域キーワード -->
@@ -15,12 +16,13 @@
     <meta name="geo.placename" content="関西,大阪府,兵庫県,京都府">
 
     <!-- OGP設定 -->
-    <meta property="og:title" content="<?php wp_title('|', true, 'right'); bloginfo('name'); ?>">
+    <meta property="og:title" content="<?php wp_title('|', true, 'right');
+                                        bloginfo('name'); ?>">
     <meta property="og:type" content="website">
     <meta property="og:url" content="<?php echo esc_url(home_url('/')); ?>">
     <meta property="og:description" content="<?php bloginfo('description'); ?>">
     <?php if (has_post_thumbnail()) : ?>
-    <meta property="og:image" content="<?php echo get_the_post_thumbnail_url(); ?>">
+        <meta property="og:image" content="<?php echo get_the_post_thumbnail_url(); ?>">
     <?php endif; ?>
 
     <!-- canonical URL -->
@@ -45,16 +47,25 @@
                 <img src="<?= esc_url(get_template_directory_uri() . '/images/logo.svg') ?>" alt="SHARAKU">
             </a>
         </h1>
+
+        <button class="header-course-btn-pc">
+            <img src="<?= esc_url(get_template_directory_uri() . '/images/写真初心者講座.png') ?>" class="header-course-img" alt="写真初心者講座">
+        </button>
     </header>
 
     <!-- モバイルヘッダー -->
     <header class="mobile-header">
-        <!-- logo -->
-        <h1 class="logo">
-            <a href="<?= home_url('/') ?>">
-                <img src="<?= esc_url(get_template_directory_uri() . '/images/logo.svg') ?>" alt="SHARAKU">
-            </a>
-        </h1>
+        <div class="header-left-container">
+            <!-- logo -->
+            <h1 class="logo">
+                <a href="<?= home_url('/') ?>">
+                    <img src="<?= esc_url(get_template_directory_uri() . '/images/logo.svg') ?>" alt="SHARAKU">
+                </a>
+            </h1>
+            <button class="header-course-btn-mobile">
+                <img src="<?= esc_url(get_template_directory_uri() . '/images/写真初心者講座.png') ?>" class="header-course-img" alt="写真初心者講座">
+            </button>
+        </div>
 
         <!-- mobile search icon -->
         <button class="search-icon">
