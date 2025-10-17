@@ -16,64 +16,72 @@ function sharaku_enqueue_assets() {
     );
 
     // 共通のJavaScriptを読み込む（全ページ共通）
-  wp_enqueue_script(
-    'sharaku-common-script',
-    get_template_directory_uri() . '/scripts/common.js',
-    [],
-    null,
-    true
-  );
+    wp_enqueue_script(
+        'sharaku-common-script',
+        get_template_directory_uri() . '/scripts/common.js',
+        [],
+        null,
+        true
+    );
 
   // モバイル検索のスクリプトを全ページで読み込む
-  wp_enqueue_script(
-      'sharaku-mobile-search-script',
-      get_template_directory_uri() . '/scripts/mobile-search.js',
-      ['sharaku-common-script'], // common.jsに依存
-      null,
-      true
-  );
+    wp_enqueue_script(
+        'sharaku-mobile-search-script',
+        get_template_directory_uri() . '/scripts/mobile-search.js',
+        ['sharaku-common-script'], // common.jsに依存
+        null,
+        true
+    );
 
   // 投稿詳細ページ用のアセット
-  if (is_singular('post')) {
+    if (is_singular('post')) {
     wp_enqueue_style(
-      'sharaku-single-post-style',
-      get_template_directory_uri() . '/styles/single-post.css'
+        'sharaku-single-post-style',
+        get_template_directory_uri() . '/styles/single-post.css'
     );
 
     wp_enqueue_script(
-      'sharaku-slider-script',
-      get_template_directory_uri() . '/scripts/slider.js',
-      [],
-      null,
-      true
+        'sharaku-slider-script',
+        get_template_directory_uri() . '/scripts/slider.js',
+        [],
+        null,
+        true
     );
 
     wp_enqueue_script(
-      'sharaku-image-modal-script',
-      get_template_directory_uri() . '/scripts/image-modal.js',
-      [],
-      null,
-      true
-    );
-  }
+        'sharaku-image-modal-script',
+        get_template_directory_uri() . '/scripts/image-modal.js',
+        [],
+        null,
+        true
+        );
+    }
 
   // ✅ 記事一覧（archive-article.php 用）
-  if (is_post_type_archive('article')) {
-      wp_enqueue_style(
-          'sharaku-archive-article-style',
-          get_template_directory_uri() . '/styles/archive-article.css'
-      );
-  }
+    if (is_post_type_archive('article')) {
+        wp_enqueue_style(
+            'sharaku-archive-article-style',
+            get_template_directory_uri() . '/styles/archive-article.css'
+        );
+        // ★ 新規追加：記事検索用スクリプト
+        wp_enqueue_script(
+            'sharaku-article-search-script',
+            get_template_directory_uri() . '/scripts/article-search.js',
+            [],
+            null,
+            true
+        );
+    }
 
   // ✅ 記事詳細（single-article.php 用）
-  if (is_singular('article')) {
-      wp_enqueue_style(
-          'sharaku-single-article-style',
-          get_template_directory_uri() . '/styles/single-article.css'
-      );
-  }
+    if (is_singular('article')) {
+    wp_enqueue_style(
+        'sharaku-single-article-style',
+        get_template_directory_uri() . '/styles/single-article.css'
+    );
+    }
 
-  if (is_front_page() || is_home()) {
+    if (is_front_page() || is_home()) {
     // index.cssは既に上で読み込み済みなので、ここでは読み込まない
 
     // index.jsを読み込む（モバイル検索は既に全ページで読み込み済み）
@@ -101,20 +109,20 @@ add_action('wp_enqueue_scripts', 'sharaku_enqueue_assets');
 add_filter('wp_lazy_loading_enabled', '__return_true');
 
 function create_article_post_type() {
-  register_post_type('article',
+    register_post_type('article',
     array(
-      'labels' => array(
+        'labels' => array(
         'name'          => '記事',
         'singular_name' => '記事'
-      ),
-      'public'       => true,
-      'has_archive'  => true,
-      'menu_position'=> 5,
-      'show_in_rest' => true,
-      'rewrite'      => array('slug' => 'article'),
-      'supports'     => array('title','editor','thumbnail','excerpt','author','revisions')
-    )
-  );
+        ),
+        'public'       => true,
+        'has_archive'  => true,
+        'menu_position'=> 5,
+        'show_in_rest' => true,
+        'rewrite'      => array('slug' => 'article'),
+        'supports'     => array('title','editor','thumbnail','excerpt','author','revisions')
+        )
+    );
 }
 add_action('init', 'create_article_post_type');
 
