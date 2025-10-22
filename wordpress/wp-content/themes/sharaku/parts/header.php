@@ -22,7 +22,7 @@
     <meta property="og:url" content="<?php echo esc_url(home_url('/')); ?>">
     <meta property="og:description" content="<?php bloginfo('description'); ?>">
     <?php if (has_post_thumbnail()) : ?>
-        <meta property="og:image" content="<?php echo get_the_post_thumbnail_url(); ?>">
+    <meta property="og:image" content="<?php echo get_the_post_thumbnail_url(); ?>">
     <?php endif; ?>
 
     <!-- canonical URL -->
@@ -48,9 +48,12 @@
             </a>
         </h1>
 
-        <button class="header-course-btn-pc">
-            <img src="<?= esc_url(get_template_directory_uri() . '/images/写真初心者講座.png') ?>" class="header-course-img" alt="写真初心者講座">
-        </button>
+        <div>
+            <a href="<?php echo get_post_type_archive_link('article'); ?>" class="header-course-btn-pc">
+                <img src="<?= esc_url(get_template_directory_uri() . '/images/写真初心者講座.png') ?>"
+                    class="header-course-img" alt="写真初心者講座">
+            </a>
+        </div>
     </header>
 
     <!-- モバイルヘッダー -->
@@ -62,9 +65,12 @@
                     <img src="<?= esc_url(get_template_directory_uri() . '/images/logo.svg') ?>" alt="SHARAKU">
                 </a>
             </h1>
-            <button class="header-course-btn-mobile">
-                <img src="<?= esc_url(get_template_directory_uri() . '/images/写真初心者講座.png') ?>" class="header-course-img" alt="写真初心者講座">
-            </button>
+            <div>
+                <a href="<?php echo get_post_type_archive_link('article'); ?>" class="header-course-btn-mobile">
+                    <img src="<?= esc_url(get_template_directory_uri() . '/images/写真初心者講座.png') ?>"
+                        class="header-course-img" alt="写真初心者講座">
+                </a>
+            </div>
         </div>
 
         <!-- mobile search icon -->
