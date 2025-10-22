@@ -234,6 +234,44 @@ function disable_author_archive() {
 }
 add_action('init', 'disable_author_archive');
 
+/**
+ * デバイス別のアーカイブ表示件数を設定
+ * モバイル: 3件、PC: 10件
+ */
+// PC/スマホで記事アーカイブの表示件数を出し分け
+function sharaku_set_archive_posts_per_page( $query ) {
+    // 管理画面/メイン以外は除外
+    if ( is_admin() || ! $query->is_main_query() ) {
+        return;
+    }
+
+    if ( $query->is_post_type_archive( 'article' ) ) {
+        // デフォルトはPC件数
+        $ppp = 10;
+
+        // 1) URLパラメータがあれば最優先 (例: /article/?pp=2)
+        if ( isset($_GET['pp']) && is_numeric($_GET['pp']) ) {
+            $ppp = max(1, intval($_GET['pp']));
+        }
+        // 2) 画面幅でフロントJSがセットしたクッキーを優先
+        elseif ( isset($_COOKIE['sp_view']) && $_COOKIE['sp_view'] === '1' ) {
+            $ppp = 6; // スマホ
+        }
+        // 3) 最後に UA 判定 (iPad等は false になるので過信しない)
+        elseif ( function_exists('wp_is_mobile') && wp_is_mobile() ) {
+            $ppp = 6;
+        }
+
+        $query->set( 'posts_per_page', $ppp );
+
+        // 念のため（ページネーション保険）
+        if ( get_query_var('paged') ) {
+            $query->set( 'paged', get_query_var('paged') );
+        }
+    }
+}
+add_action( 'pre_get_posts', 'sharaku_set_archive_posts_per_page', 99 ); // 後段で上書きされないよう優先度を上げる
+
 
 // すべての画像にloading="lazy"属性を追加
 function add_lazy_loading_attribute($content) {
