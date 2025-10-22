@@ -1,4 +1,16 @@
 <!-- 記事一覧 -->
+<?php
+// 現在がスマホなら true
+$is_mobile = wp_is_mobile();
+
+// 記事アーカイブのURLを取得
+$article_archive_url = get_post_type_archive_link('article');
+
+// スマホのときだけ ?pp=2 を追加
+if ( $is_mobile ) {
+    $article_archive_url = add_query_arg( 'pp', '6', $article_archive_url );
+}
+?>
 <?php include get_template_directory() . '/parts/header.php'; ?>
 <main>
     <section class="archive-header">
@@ -47,7 +59,33 @@
                     <?php endif; ?>
                 </div>
                 <div class="article-content">
-                    <h2 class="article-title"><?php the_title(); ?></h2>
+                    <?php
+                        // タイトル内の '!' を改行 (<br>) に置換して表示する
+                        $raw_title = get_the_title();
+                    // 半角/全角の '!' を消さずに直後で改行させる（'!' -> '!<br>'、'！' -> '！<br>'）
+                    $escaped = esc_html( $raw_title );
+                    $formatted_title = str_replace( array('!','！'), array('!<br>','！<br>'), $escaped );
+                        // <br>タグのみ許可して出力
+                        echo '<h2 class="article-title">' . wp_kses( $formatted_title, array( 'br' => array() ) ) . '</h2>';
+                    ?>
+                    <?php
+                        // モバイルでのみ表示する「はじめに」セクションの抜粋を取得
+                        // 本文 HTML から <h2>または<h3>で「はじめに」とある部分の直後の最初の<p>を抽出
+                        $content = apply_filters('the_content', get_post_field('post_content', get_the_ID()));
+                        $intro_excerpt = '';
+
+                        if ( $content ) {
+                            // 正規表現で見出し（はじめに）を探し、その直後の最初の段落を取得
+                            if ( preg_match('/<(h[2-3])[^>]*>\s*はじめに\s*<\/\1>\s*(?:<!--.*?-->\s*)*<p[^>]*>(.*?)<\/p>/siu', $content, $matches) ) {
+                                $intro_excerpt = wp_kses( $matches[2], array( 'a'=>array('href'=>array()), 'br'=>array(), 'strong'=>array(), 'em'=>array() ) );
+                            }
+                        }
+
+                        if ( $intro_excerpt ) : ?>
+                    <div class="mobile-intro-excerpt">
+                        <?php echo '<p class="line-clamp">' . $intro_excerpt . '</p>'; ?>
+                    </div>
+                    <?php endif; ?>
                     <p class="article-meta">
                         <?php echo get_the_date('Y.m.d'); ?> ｜ <?php the_author(); ?>
                     </p>
@@ -62,11 +100,13 @@
 
     <!-- ページネーション -->
     <div class="pagination">
-        <?php the_posts_pagination(array(
-            'mid_size' => 2,
-            'prev_text' => '← 前へ',
-            'next_text' => '次へ →',
-        )); ?>
+        <?php the_posts_pagination([
+            'mid_size'           => 3,
+            'prev_text'          => '&lsaquo;', // <
+            'next_text'          => '&rsaquo;', // >
+            'screen_reader_text' => '',
+            'type'               => 'list',     // ← <ul class="page-numbers"> にする
+        ]); ?>
     </div>
 </main>
 <?php include get_template_directory() . '/parts/footer.php'; ?>
