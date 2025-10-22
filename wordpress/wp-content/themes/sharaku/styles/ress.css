@@ -32,3 +32,86 @@ li {
 a {
     text-decoration: none;
 }
+
+/* wrapper */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0 60px;
+}
+
+/* pill コンテナ */
+.pagination .page-numbers {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 18px;
+    background: #fefefe;
+    border-radius: 100px;
+    list-style: none;
+}
+
+/* 各要素のリセット */
+.pagination .page-numbers li {
+    list-style: none;
+}
+
+/* 数字・矢印共通 */
+.pagination .page-numbers a,
+.pagination .page-numbers span {
+    width: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    text-decoration: none;
+    line-height: 1;
+    color: #f28c2a;
+    font-size: 14px;
+    transition: background-color 0.15s ease, color 0.15s ease, transform 0.05s ease;
+}
+
+/* hover */
+.pagination .page-numbers a:hover {
+    background: rgba(242, 140, 42, 0.12);
+}
+
+/* 現在ページ（塗りつぶしの丸） */
+.pagination .page-numbers .current {
+    background: #f7a15a; /* オレンジ塗り */
+    color: #fff;
+}
+
+/* 省略記号 … は丸にしない */
+.pagination .page-numbers .dots {
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    padding: 0 4px;
+    background: transparent;
+}
+
+/* 矢印（< >）は少し小さめでもOK */
+.pagination .page-numbers .prev,
+.pagination .page-numbers .next {
+    width: 28px;
+    height: 28px;
+}
+
+/* クリック感 */
+.pagination .page-numbers a:active {
+    transform: translateY(1px);
+}
+
+/* 小さめ画面の余白調整 */
+@media (max-width: 480px) {
+    .pagination .page-numbers {
+        gap: 8px;
+        padding: 6px 14px;
+    }
+    .pagination .page-numbers a,
+    .pagination .page-numbers span {
+        width: 28px;
+        height: 28px;
+    }
+}
