@@ -1,11 +1,15 @@
 :root {
     --fontColor: #151515;
     --whiteColor: #ececec;
+    --metaColor: #cccccc;
     --bgColor: #fefefe;
     --borderColor: #d9d9d9;
     --bgBkgColor: #373737;
+    --introBgColor: #fff8eb;
+    --stepHeight: 40px;
     --fontFamily: "Noto Sans JP", sans-serif;
     --tagOverlayColor: 250, 250, 250;
+    --articleImageShadow: 0 0 8px 2px rgba(15, 15, 15, 0.15);
 }
 
 * {

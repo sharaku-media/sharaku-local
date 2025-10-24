@@ -109,18 +109,24 @@ add_action('wp_enqueue_scripts', 'sharaku_enqueue_assets');
 add_filter('wp_lazy_loading_enabled', '__return_true');
 
 function create_article_post_type() {
+    // アイキャッチ画像を有効化
+    add_theme_support('post-thumbnails');
     register_post_type('article',
     array(
         'labels' => array(
-        'name'          => '記事',
-        'singular_name' => '記事'
+            'name'          => '記事',
+            'singular_name' => '記事',
+            'featured_image'        => 'アイキャッチ画像',
+            'set_featured_image'    => 'アイキャッチ画像を設定',
+            'remove_featured_image' => 'アイキャッチ画像を削除',
+            'use_featured_image'    => 'アイキャッチ画像として使用'
         ),
         'public'       => true,
         'has_archive'  => true,
         'menu_position'=> 5,
         'show_in_rest' => true,
         'rewrite'      => array('slug' => 'article'),
-        'supports'     => array('title','editor','thumbnail','excerpt','author','revisions')
+        'supports'     => array('title', 'editor', 'thumbnail', 'excerpt', 'author', 'revisions')
         )
     );
 }
@@ -131,14 +137,7 @@ add_action('init', function () {
     $post_type = get_post_type_object('article');
     if ($post_type) {
         $post_type->template = [
-
-            // 1. メイン画像（1枚）
-            ['core/image', [
-                'align' => 'wide',
-                'className' => 'main-image'
-            ]],
-
-            // 2. はじめに
+            // 1. はじめに
             ['core/group', [
                 'className' => 'block-section intro-section'
             ], [
@@ -167,31 +166,52 @@ add_action('init', function () {
                 ]]
             ]],
 
-            // 4. ステップ解説 1
-            ['core/group', ['className' => 'block-section step-section'], [
+            // 4. ステップ解説セクション
+            ['core/group', ['className' => 'block-section steps-wrapper'], [
                 ['core/heading', [
                     'level' => 3,
-                    'content' => 'STEP1：タイトルを入力', // ←初期値、自由に編集可能
+                    'content' => 'ステップ解説',
+                    'className' => 'fixed-heading'
                 ]],
-                ['core/paragraph', ['placeholder' => 'ここに解説を入力']]
-            ]],
 
-            // 4. ステップ解説 2
-            ['core/group', ['className' => 'block-section step-section'], [
-                ['core/heading', [
-                    'level' => 3,
-                    'content' => 'STEP2：タイトルを入力',
+                // ステップ1
+                ['core/group', ['className' => 'block-section step-section'], [
+                    ['core/heading', [
+                        'level' => 3,
+                        'content' => 'STEP1：タイトルを入力', // ←初期値、自由に編集可能
+                    ]],
+                    ['core/image', [
+                        'className' => 'step-image',
+                        'align' => 'center'
+                    ]],
+                    ['core/paragraph', ['placeholder' => 'ここに解説を入力']]
                 ]],
-                ['core/paragraph', ['placeholder' => 'ここに解説を入力']]
-            ]],
 
-            // 4. ステップ解説 3
-            ['core/group', ['className' => 'block-section step-section'], [
-                ['core/heading', [
-                    'level' => 3,
-                    'content' => 'STEP3：タイトルを入力',
+                // ステップ2
+                ['core/group', ['className' => 'block-section step-section'], [
+                    ['core/heading', [
+                        'level' => 3,
+                        'content' => 'STEP2：タイトルを入力',
+                    ]],
+                    ['core/image', [
+                        'className' => 'step-image',
+                        'align' => 'center'
+                    ]],
+                    ['core/paragraph', ['placeholder' => 'ここに解説を入力']]
                 ]],
-                ['core/paragraph', ['placeholder' => 'ここに解説を入力']]
+
+                // ステップ3
+                ['core/group', ['className' => 'block-section step-section'], [
+                    ['core/heading', [
+                        'level' => 3,
+                        'content' => 'STEP3：タイトルを入力',
+                    ]],
+                    ['core/image', [
+                        'className' => 'step-image',
+                        'align' => 'center'
+                    ]],
+                    ['core/paragraph', ['placeholder' => 'ここに解説を入力']]
+                ]]
             ]],
 
             // 5. ワンポイントアドバイス
@@ -199,19 +219,10 @@ add_action('init', function () {
                 ['core/heading', ['level' => 3, 'content' => 'ワンポイントアドバイス']],
                 ['core/paragraph', ['placeholder' => 'ちょっとした補足やプロのコツを書いてください']]
             ]],
-
-            // 6. 関連記事
-            ['core/group', ['className' => 'block-section related-section'], [
-                ['core/heading', [
-                    'level' => 3,
-                    'content' => '関連記事'
-                ]],
-                // 👇 ここには何も置かず、ユーザーが自由にブロック追加できるようにする
-            ]],
         ];
 
-        // ブロック構成は固定せず「追加はOK／削除はNG」にしたい場合
-        $post_type->template_lock = 'insert';
+        // テンプレートロックを解除して自由に編集可能にする
+        $post_type->template_lock = null;
     }
 });
 
