@@ -180,8 +180,7 @@ h3 {
             left: 0;
             width: 24px;
             height: 24px;
-            background: url("https://sharaku-photo.sakura.ne.jp/wp-content/themes/sharaku/images/pin-icon.svg")
-                no-repeat center;
+            background: url("../images/pin-icon.svg") no-repeat center;
         }
 
         .label-train:empty::before,
@@ -203,8 +202,7 @@ h3 {
             left: 0;
             width: 24px;
             height: 24px;
-            background: url("https://sharaku-photo.jp/wp-content/themes/sharaku/images/train.svg")
-                no-repeat center;
+            background: url("../images/train.svg") no-repeat center;
         }
 
         .label-bus:before {
@@ -214,8 +212,7 @@ h3 {
             left: 0;
             width: 24px;
             height: 24px;
-            background: url("https://sharaku-photo.jp/wp-content/themes/sharaku/images/bus.svg")
-                no-repeat center;
+            background: url("../images/bus.svg") no-repeat center;
         }
 
         /* .label-walk:before {
