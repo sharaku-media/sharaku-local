@@ -75,10 +75,18 @@ function sharaku_enqueue_assets() {
 
   // ✅ 記事詳細（single-article.php 用）
     if (is_singular('article')) {
-    wp_enqueue_style(
-        'sharaku-single-article-style',
-        get_template_directory_uri() . '/styles/single-article.css'
-    );
+        // archive-article.cssを先に読み込む（依存関係として）
+        wp_enqueue_style(
+            'sharaku-archive-article-style-for-single',
+            get_template_directory_uri() . '/styles/archive-article.css'
+        );
+        
+        // single-article.cssを読み込む（archive-article.cssに依存）
+        wp_enqueue_style(
+            'sharaku-single-article-style',
+            get_template_directory_uri() . '/styles/single-article.css',
+            // array('sharaku-archive-article-style-for-single') // 依存関係を指定
+        );
     }
 
     if (is_front_page() || is_home()) {

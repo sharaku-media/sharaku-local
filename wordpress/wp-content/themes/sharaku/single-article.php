@@ -141,7 +141,7 @@
                 if ( $related->have_posts() ) :?>
                 <aside class="related-posts">
                     <h3>関連記事</h3>
-                    <div class="related-list">
+                    <div class="article-grid">
                         <?php while ( $related->have_posts() ) : $related->the_post(); ?>
                         <article class="article-card">
                             <a class="article-box" href="<?php the_permalink(); ?>">
