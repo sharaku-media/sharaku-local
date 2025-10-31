@@ -140,6 +140,20 @@ function create_article_post_type() {
 }
 add_action('init', 'create_article_post_type');
 
+// パーマリンクを自動更新（カスタム投稿タイプ登録後）
+function sharaku_flush_rewrite_rules() {
+    create_article_post_type();
+    flush_rewrite_rules();
+}
+register_activation_hook(__FILE__, 'sharaku_flush_rewrite_rules');
+
+// テーマ切り替え時にもパーマリンクを更新
+function sharaku_theme_activation() {
+    create_article_post_type();
+    flush_rewrite_rules();
+}
+add_action('after_switch_theme', 'sharaku_theme_activation');
+
 // 記事(article)のブロックエディタ初期構成
 add_action('init', function () {
     $post_type = get_post_type_object('article');

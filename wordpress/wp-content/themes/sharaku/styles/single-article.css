@@ -310,6 +310,10 @@ body {
                 border-radius: 5px;
             }
 
+            h3 {
+                font-size: 22px;
+            }
+
             .steps-wrapper {
                 .step-section {
                     h3 {

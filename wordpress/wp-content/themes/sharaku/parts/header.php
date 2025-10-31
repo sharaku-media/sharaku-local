@@ -49,7 +49,14 @@
         </h1>
 
         <div>
-            <a href="<?php echo get_post_type_archive_link('article'); ?>" class="header-course-btn-pc">
+            <?php 
+            $article_archive_url = get_post_type_archive_link('article');
+            // デバッグ用: URLが正しく生成されているか確認
+            if (!$article_archive_url) {
+                $article_archive_url = home_url('/article/');
+            }
+            ?>
+            <a href="<?php echo esc_url($article_archive_url); ?>" class="header-course-btn-pc">
                 <img src="<?= esc_url(get_template_directory_uri() . '/images/写真初心者講座.png') ?>"
                     class="header-course-img" alt="写真初心者講座">
             </a>
@@ -66,7 +73,14 @@
                 </a>
             </h1>
             <div>
-                <a href="<?php echo get_post_type_archive_link('article'); ?>" class="header-course-btn-mobile">
+                <?php 
+                $article_archive_url = get_post_type_archive_link('article');
+                // デバッグ用: URLが正しく生成されているか確認
+                if (!$article_archive_url) {
+                    $article_archive_url = home_url('/article/');
+                }
+                ?>
+                <a href="<?php echo esc_url($article_archive_url); ?>" class="header-course-btn-mobile">
                     <img src="<?= esc_url(get_template_directory_uri() . '/images/写真初心者講座.png') ?>"
                         class="header-course-img" alt="写真初心者講座">
                 </a>
